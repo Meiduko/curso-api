@@ -1,6 +1,6 @@
 const express = require('express');
-const middlewwares = require('./middlewares');
-//Routes
+const middlewares = require('./middlewares');
+// Routes
 const authRoutes = require('./auth/auth.router').router;
 const teamsRoutes = require('./teams/teams.router').router;
 
@@ -8,7 +8,7 @@ const app = express();
 
 const port = 3000;
 
-middlewwares.setupMiddlewares(app);
+middlewares.setupMiddlewares(app);
 app.get('/', (req, res) => {
     // req es la request, la peticion
     // res es la respuesta
@@ -16,9 +16,7 @@ app.get('/', (req, res) => {
 });
 app.use('/auth', authRoutes);
 app.use('/teams', teamsRoutes);
-
 app.listen(port, () => {
     console.log('Server started at port 3000');
 })
-
 exports.app = app;

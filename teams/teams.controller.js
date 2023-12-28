@@ -17,7 +17,6 @@ const addPokemon = (userId, pokemon) => {
     teamsDatabase[userId].push(pokemon);
 }
 const deletePokemon = (userId, index) =>{
-    console.log('DELETE', userId, index);
     if(teamsDatabase[userId][index]) {
         teamsDatabase[userId].splice(index, 1)
     }
