@@ -1,19 +1,22 @@
 let teamsDatabase = {};
 
 const cleanUpTeam = () => {
-    return new Promise ((resolve, reject) =>{
-        for(let user in teamsDatabase){
+    return new Promise((resolve, reject) => {
+        for (let user in teamsDatabase) {
             teamsDatabase[user] = [];
         }
         resolve();
     })
 }
 
-const bootstrapTeam = (userId) =>{
-    teamsDatabase[userId] = [];
+const bootstrapTeam = (userId) => {
+    return new Promise((resolve, reject) => {
+        teamsDatabase[userId] = [];
+        resolve();
+    })
 }
 
-const getTeamOfUser = (userId) =>{
+const getTeamOfUser = (userId) => {
     return new Promise((resolve, reject) => {
         resolve(teamsDatabase[userId]);
     });
@@ -29,19 +32,28 @@ const addPokemon = (userId, pokemon) => {
         }
     });
 }
-const deletePokemon = (userId, index) =>{
-    if(teamsDatabase[userId][index]) {
-        teamsDatabase[userId].splice(index, 1)
-    }
+
+const deletePokemonAt = (userId, index) => {
+    return new Promise((resolve, reject) => {
+        if (teamsDatabase[userId][index]) {
+            teamsDatabase[userId].splice(index, 1);
+        }
+        resolve();
+    })
+
 }
 
 const setTeam = (userId, team) => {
-    teamsDatabase[userId] = team;
+    return new Promise((resolve, reject) => {
+        teamsDatabase[userId] = team;
+        resolve();
+    })
+
 }
 
 exports.bootstrapTeam = bootstrapTeam;
 exports.addPokemon = addPokemon;
-exports.deletePokemon = deletePokemon;
 exports.setTeam = setTeam;
 exports.getTeamOfUser = getTeamOfUser;
 exports.cleanUpTeam = cleanUpTeam;
+exports.deletePokemonAt = deletePokemonAt;
